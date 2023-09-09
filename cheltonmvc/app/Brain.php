@@ -8,11 +8,10 @@ class Brain
 {
     function __construct()
     {
-        LoadMenu();
+        $this->LoadMenu();
     }
-}
-
-function LoadMenu()
-{
-    $controller = new Controller\Menu();
+    public function LoadMenu()
+    {
+        $controller = new Controller\Menu();
+    }
 }

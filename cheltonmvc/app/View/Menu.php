@@ -2,12 +2,23 @@
 
 namespace App\View; // Adjust the namespace
 
+use joshtronic\LoremIpsum;
+
 class Menu extends View
 {
+
+    public function GenerateIpsum()
+    {
+        $loremIpsum = new LoremIpsum();
+
+        $text = $loremIpsum->words(30);
+        echo "<h1>" . $text . "</h1>";
+    }
 
     public function Render()
     {
         echo $this->header;
+        $this->GenerateIpsum();
         echo $this->card_header;
         foreach ($this->data as $item) {
             $description_source = $item->description;
