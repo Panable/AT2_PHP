@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MySQL service name as specified in docker-compose file
-service_name='crimson-mysql-1'
+service_name='at2_php-mysql-1'
 
 # Database credentials
 username='user'

@@ -1,5 +1,13 @@
 <?php
-class database
+
+namespace App\Model;
+use \PDO;
+use \PDOException;
+
+//Base Model Class
+//Accesses the DB
+
+class Model
 {
     private $host = DB_HOST;
     private $user = DB_USER;
@@ -10,7 +18,7 @@ class database
     private $stmt;
     private $error;
 
-    public function __construct()
+    protected function __construct()
     {
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = array(
@@ -25,12 +33,12 @@ class database
         }
     }
 
-    public function query($sql)
+    protected function query($sql)
     {
         $this->stmt = $this->dbh->prepare($sql);
     }
 
-    public function bind($param, $value, $type = null)
+    protected function bind($param, $value, $type = null)
     {
         if (is_null($type))
             switch (true) {
@@ -50,25 +58,27 @@ class database
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function execute()
+    protected function execute()
     {
         return $this->stmt->execute();
     }
 
-    public function resultSet()
+    protected function resultSet()
     {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function single()
+    protected function single()
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function rowCount()
+    protected function rowCount()
     {
         return $this->stmt->rowCount();
     }
 }
+
+
